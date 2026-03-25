@@ -8,23 +8,23 @@
     --shadow: 0 10px 30px rgba(15, 23, 42, 0.1);
     --radius: 16px;
 }
-
+ 
 * {
     box-sizing: border-box;
 }
-
+ 
 body {
     margin: 0;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     color: var(--text);
     background: linear-gradient(180deg, #eef3ff 0%, var(--bg) 100%);
 }
-
+ 
 .container {
     width: min(1080px, 92%);
     margin: 0 auto;
 }
-
+ 
 .topbar {
     position: sticky;
     top: 0;
@@ -32,34 +32,34 @@ body {
     background: rgba(255, 255, 255, 0.8);
     border-bottom: 1px solid #e5e7eb;
 }
-
+ 
 .topbar .container {
     display: flex;
     align-items: center;
     justify-content: space-between;
     min-height: 68px;
 }
-
+ 
 .brand {
     font-weight: 700;
     font-size: 1.2rem;
 }
-
+ 
 .menu {
     display: flex;
     gap: 1.2rem;
 }
-
+ 
 .menu a {
     text-decoration: none;
     color: var(--text);
     font-weight: 500;
 }
-
+ 
 .hero {
     padding: 5rem 0 3.5rem;
 }
-
+ 
 .eyebrow {
     display: inline-block;
     margin: 0;
@@ -70,19 +70,19 @@ body {
     font-size: 0.85rem;
     font-weight: 700;
 }
-
+ 
 h1 {
     margin: 1rem 0 0.8rem;
     font-size: clamp(1.8rem, 4vw, 3rem);
     max-width: 18ch;
 }
-
+ 
 .hero-text {
     max-width: 62ch;
     color: var(--muted);
     line-height: 1.6;
 }
-
+ 
 .cta {
     margin-top: 1.25rem;
     display: inline-block;
@@ -93,15 +93,15 @@ h1 {
     padding: 0.8rem 1.2rem;
     border-radius: 10px;
 }
-
+ 
 .cta:hover {
     background: var(--primary-hover);
 }
-
+ 
 .product-section {
     padding: 1rem 0 4rem;
 }
-
+ 
 .product-card {
     margin-top: 1rem;
     display: grid;
@@ -113,7 +113,7 @@ h1 {
     overflow: hidden;
     position: relative;
 }
-
+ 
 .badge {
     position: absolute;
     top: 0.9rem;
@@ -125,23 +125,23 @@ h1 {
     font-size: 0.8rem;
     font-weight: 700;
 }
-
+ 
 .product-card img {
     width: 100%;
     height: 100%;
     min-height: 320px;
     object-fit: cover;
 }
-
+ 
 .product-content {
     padding: 1.5rem;
 }
-
+ 
 .product-content p {
     color: var(--muted);
     line-height: 1.55;
 }
-
+ 
 .product-footer {
     margin-top: 1.2rem;
     display: flex;
@@ -149,12 +149,12 @@ h1 {
     justify-content: space-between;
     gap: 1rem;
 }
-
+ 
 .price {
     font-size: 1.2rem;
     font-weight: 700;
 }
-
+ 
 button {
     border: 0;
     border-radius: 10px;
@@ -164,11 +164,11 @@ button {
     font-weight: 600;
     cursor: pointer;
 }
-
+ 
 button:hover {
     background: #374151;
 }
-
+ 
 .footer {
     border-top: 1px solid #e5e7eb;
     background: #fff;
@@ -176,18 +176,18 @@ button:hover {
     padding: 1rem 0;
     text-align: center;
 }
-
+ 
 @media (max-width: 800px) {
     .product-card {
         grid-template-columns: 1fr;
     }
-
+ 
     .menu {
         gap: 0.8rem;
         font-size: 0.95rem;
     }
 }
-
+ 
 /* =============================================================
    Page profil
    ============================================================= */
@@ -199,7 +199,7 @@ button:hover {
     max-width: 600px;
     margin: 2rem auto;
 }
-
+ 
 .profile-photo {
     width: 120px;
     height: 120px;
@@ -209,7 +209,7 @@ button:hover {
     display: block;
     margin: 0 auto 1.5rem;
 }
-
+ 
 .profile-photo-placeholder {
     width: 120px;
     height: 120px;
@@ -222,17 +222,17 @@ button:hover {
     font-size: 2.5rem;
     color: var(--muted);
 }
-
+ 
 .form-group {
     margin-bottom: 1.2rem;
 }
-
+ 
 label {
     display: block;
     font-weight: 600;
     margin-bottom: 0.4rem;
 }
-
+ 
 input[type="text"],
 input[type="file"] {
     width: 100%;
@@ -241,31 +241,31 @@ input[type="file"] {
     border-radius: 8px;
     font-size: 1rem;
 }
-
+ 
 .info-row {
     display: flex;
     gap: 0.5rem;
     margin-bottom: 0.5rem;
     color: var(--muted);
 }
-
+ 
 .info-row strong {
     color: var(--text);
     min-width: 80px;
 }
-
+ 
 .message {
     padding: 0.6rem 1rem;
     border-radius: 8px;
     margin-bottom: 1rem;
     display: none;
 }
-
+ 
 .message.success { background: #dcfce7; color: #166534; }
 .message.error   { background: #fee2e2; color: #991b1b; }
-
+ 
 hr { border: none; border-top: 1px solid #e5e7eb; margin: 1.5rem 0; }
-
+ 
 /* =============================================================
    Page admin
    ============================================================= */
@@ -277,13 +277,13 @@ table {
     overflow: hidden;
     box-shadow: var(--shadow);
 }
-
+ 
 th, td {
     text-align: left;
     padding: 0.8rem 1rem;
     border-bottom: 1px solid #e5e7eb;
 }
-
+ 
 th {
     background: #f9fafb;
     font-weight: 700;
@@ -292,10 +292,10 @@ th {
     letter-spacing: 0.05em;
     color: var(--muted);
 }
-
+ 
 tr:last-child td { border-bottom: none; }
 tr:hover td { background: #f9fafb; }
-
+ 
 .badge-admin {
     background: #dbeafe;
     color: #1d4ed8;
@@ -304,7 +304,7 @@ tr:hover td { background: #f9fafb; }
     font-size: 0.8rem;
     font-weight: 700;
 }
-
+ 
 .badge-user {
     background: #f3f4f6;
     color: var(--muted);
@@ -312,5 +312,6 @@ tr:hover td { background: #f9fafb; }
     border-radius: 6px;
     font-size: 0.8rem;
 }
-
+ 
 .admin-section { padding: 2rem 0 4rem; }
+ 
