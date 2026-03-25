@@ -30,7 +30,21 @@ module.exports = {
     // ----------------------------------------------------------
     // POST /api/auth/register
     // ----------------------------------------------------------
-    register: (_req, res) => {
-        res.status(501).json({ error: 'Non implémenté — TODO exercice 7' });
+    register: (req, res) => {
+        const { username, email, password, address, photo} = req.body;
+
+        if (!username || !email || !password || !address) {
+            return res.status(400).json({ error: 'Des champs ne sont pas remplis'});
+        }
+
+        const query = `INSERT INTO users (username, email, password, address, photo_path) VALUES ('${username}', '${email}', '${password}', '${address}', '${photo}')`
+
+        db.query(query, (err, results) => {
+            if (err) {
+                return res.status(500).json({ error: err.message, query: query });
+            }
+
+            res.json({ message: 'Inscription réussie', user: results[0] });
+        })
     }
 };

@@ -315,3 +315,59 @@ tr:hover td { background: #f9fafb; }
  
 .admin-section { padding: 2rem 0 4rem; }
  
+/* --- Adaptations pour les nouveaux champs --- */
+
+/* Stylisation du champ de fichier (Photo) */
+input[type="file"] {
+    background: #f9fafb;
+    cursor: pointer;
+    padding: 0.5rem; /* Un peu moins de padding car le bouton interne en prend déjà */
+}
+
+/* On cible le bouton à l'intérieur de l'input file (spécifique aux navigateurs récents) */
+input[type="file"]::file-selector-button {
+    border: none;
+    background: var(--primary);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    margin-right: 1rem;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+input[type="file"]::file-selector-button:hover {
+    background: var(--primary-hover);
+}
+
+/* Stylisation du champ Adresse (Textarea) */
+textarea {
+    width: 100%;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit; /* Pour éviter la police monospace par défaut */
+    resize: vertical;     /* Permet à l'utilisateur d'agrandir en hauteur seulement */
+    min-height: 80px;
+    background: var(--surface);
+    color: var(--text);
+}
+
+textarea:focus, 
+input[type="text"]:focus, 
+input[type="email"]:focus, 
+input[type="password"]:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Petit texte d'aide sous les champs */
+.form-help {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.3rem;
+    display: block;
+}
