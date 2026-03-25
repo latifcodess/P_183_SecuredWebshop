@@ -12,9 +12,9 @@ module.exports = {
             return res.status(400).json({ error: 'Email et mot de passe requis' });
         }
 
-        const query = `SELECT * FROM users WHERE email = '${email}' AND password = '${password}'`;
+        const query = `SELECT * FROM users WHERE email = ${email} AND password = ${password}`
 
-        db.query(query, (err, results) => {
+        db.query('SELECT * FROM users WHERE email = ? AND password = ?',[email, password], (err, results) => {
             if (err) {
                 return res.status(500).json({ error: err.message, query: query });
             }
@@ -39,7 +39,7 @@ module.exports = {
 
         const query = `INSERT INTO users (username, email, password, address, photo_path) VALUES ('${username}', '${email}', '${password}', '${address}', '${photo}')`
 
-        db.query(query, (err, results) => {
+        db.query('INSERT INTO users (username, email, password, address, photo_path) VALUES (?, ?, ?, ?, ?)',[username, email, password, address, photo], (err, results) => {
             if (err) {
                 return res.status(500).json({ error: err.message, query: query });
             }
