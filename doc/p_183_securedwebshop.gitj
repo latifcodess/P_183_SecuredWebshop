@@ -4,5 +4,52 @@
   "branch": "main",
   "me": "latifcodess",
   "journalStartDate": "2026-03-18T10:24:00.000Z",
-  "exceptions": []
+  "exceptions": [
+    {
+      "id": "7a108225-413e-4d5c-a46c-789fd66f019b",
+      "type": "commitless",
+      "name": "Mot de passé epicé",
+      "description": "J'ai modifié les mots de passe en db par des mots de passe hashé et salé et j'ai commencé a chercher comment je pouvais poivré mes mots de passes",
+      "date": "2026-04-01T07:34:00.000Z",
+      "duration": 30,
+      "status": "Done",
+      "author": "latifcodess"
+    },
+    {
+      "id": "b0f304a0-f77f-49e4-8130-c3a6c73ed558",
+      "type": "commitpatch",
+      "sha": "48c647a6769f01658bd29666962d84ccb70b3a7e",
+      "url": "https://github.com/latifcodess/P_183_SecuredWebshop/commit/48c647a6769f01658bd29666962d84ccb70b3a7e",
+      "name": "feat(AuthController): connexion et inscription avec mot de passe hashé",
+      "description": "J'ai cherché un bon algorithme de hash et j'a finalement trouvé bcrypt ensuite j'ai hashé mes mots de passe a l'inscription en ajoutant un sel et j'ai hashé les mots de passes a la connexion pour comparé avec le mot de passe en db",
+      "date": "2026-04-01T07:02:00.000Z",
+      "duration": 60,
+      "status": "Done",
+      "author": "latifcodess",
+      "patch": true
+    },
+    {
+      "id": "18165b6f-848f-4448-91bb-2871c45e408b",
+      "type": "commitpatch",
+      "sha": "f9d68e74e5b7695a673a21e00a74663f82833a4a",
+      "url": "https://github.com/latifcodess/P_183_SecuredWebshop/commit/f9d68e74e5b7695a673a21e00a74663f82833a4a",
+      "name": "chore(AuthController): supression du mot de passe avant l'affichage des données user en json",
+      "description": "(c'était un test pour voir si ma signature gpg fonctionnait)",
+      "date": "2026-04-01T09:10:00.000Z",
+      "duration": 5,
+      "status": "Done",
+      "author": "latifcodess",
+      "patch": true
+    },
+    {
+      "id": "99c737d1-bf68-4ee7-883a-4b7d45254088",
+      "type": "commitless",
+      "name": "Signature GPG",
+      "description": "J'ai galeré pendant 1h30 pour configuré ma signature GPG je faisais exactement la meme chose que david mais ça ne marchait pas et finalement comme par magie ça a enfin fonctionné",
+      "date": "2026-04-01T09:00:00.000Z",
+      "duration": 90,
+      "status": "Done",
+      "author": "latifcodess"
+    }
+  ]
 }
