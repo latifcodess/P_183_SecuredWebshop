@@ -28,7 +28,8 @@ module.exports = {
         }
 
         const user = results[0];
-        const isMatch = await bcrypt.compare(password, user.password);
+        const spicyPassword = password + pepper
+        const isMatch = await bcrypt.compare(spicyPassword, user.password);
 
         if (!isMatch) {
           return res
@@ -56,8 +57,10 @@ module.exports = {
     }
 
     try {
+
+      const spicyPassword = password + pepper
       const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(password, salt);
+      const hashedPassword = await bcrypt.hash(spicyPassword, salt);
 
       const sql =
         "INSERT INTO users (username, email, password, address, photo_path) VALUES (?, ?, ?, ?, ?)";
