@@ -1,5 +1,6 @@
 const db = require("../config/db");
 const bcrypt = require("bcryptjs");
+const pepper = process.env.PEPPER;
 
 module.exports = {
   // ----------------------------------------------------------
@@ -13,9 +14,6 @@ module.exports = {
     }
 
     try {
-      const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(password, salt);
-
       const sql = "SELECT * FROM users WHERE email = ?";
 
       db.query(sql, [email], async (err, results) => {
@@ -38,7 +36,7 @@ module.exports = {
             .json({ error: "Email ou mot de passe incorrect" });
         }
 
-        delete user.password
+        delete user.password;
 
         res.json({ message: "Connexion réussie", user: results[0] });
       });
