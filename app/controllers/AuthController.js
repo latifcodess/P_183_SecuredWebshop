@@ -1,50 +1,79 @@
-const db = require('../config/db');
+const db = require("../config/db");
+const bcrypt = require("bcryptjs");
 
 module.exports = {
+  // ----------------------------------------------------------
+  // POST /api/auth/login
+  // ----------------------------------------------------------
+  login: async (req, res) => {
+    const { email, password } = req.body;
 
-    // ----------------------------------------------------------
-    // POST /api/auth/login
-    // ----------------------------------------------------------
-    login: (req, res) => {
-        const { email, password } = req.body;
-
-        if (!email || !password) {
-            return res.status(400).json({ error: 'Email et mot de passe requis' });
-        }
-
-        const query = `SELECT * FROM users WHERE email = ${email} AND password = ${password}`
-
-        db.query('SELECT * FROM users WHERE email = ? AND password = ?',[email, password], (err, results) => {
-            if (err) {
-                return res.status(500).json({ error: err.message, query: query });
-            }
-
-            if (results.length === 0) {
-                return res.status(401).json({ error: 'Email ou mot de passe incorrect' });
-            }
-
-            res.json({ message: 'Connexion réussie', user: results[0] });
-        });
-    },
-
-    // ----------------------------------------------------------
-    // POST /api/auth/register
-    // ----------------------------------------------------------
-    register: (req, res) => {
-        const { username, email, password, address, photo} = req.body;
-
-        if (!username || !email || !password || !address) {
-            return res.status(400).json({ error: 'Des champs ne sont pas remplis'});
-        }
-
-        const query = `INSERT INTO users (username, email, password, address, photo_path) VALUES ('${username}', '${email}', '${password}', '${address}', '${photo}')`
-
-        db.query('INSERT INTO users (username, email, password, address, photo_path) VALUES (?, ?, ?, ?, ?)',[username, email, password, address, photo], (err, results) => {
-            if (err) {
-                return res.status(500).json({ error: err.message, query: query });
-            }
-
-            res.json({ message: 'Inscription réussie', user: results[0] });
-        })
+    if (!email || !password) {
+      return res.status(400).json({ error: "Email et mot de passe requis" });
     }
+
+    try {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+
+      const sql = "SELECT * FROM users WHERE email = ?";
+
+      db.query(sql, [email], async (err, results) => {
+        if (err) {
+          return res.status(500).json({ error: err.message, query: query });
+        }
+
+        if (results.length === 0) {
+          return res
+            .status(401)
+            .json({ error: "Email ou mot de passe incorrect" });
+        }
+
+        const user = results[0];
+        const isMatch = await bcrypt.compare(password, user.password);
+
+        if (!isMatch) {
+          return res
+            .status(401)
+            .json({ error: "Email ou mot de passe incorrect" });
+        }
+
+        delete user.password
+
+        res.json({ message: "Connexion réussie", user: results[0] });
+      });
+    } catch (error) {
+      res.status(401).json({ error: "Email ou mot de passe incorrect" });
+    }
+  },
+
+  // ----------------------------------------------------------
+  // POST /api/auth/register
+  // ----------------------------------------------------------
+  register: async (req, res) => {
+    const { username, email, password, address, photo } = req.body;
+
+    if (!username || !email || !password || !address) {
+      return res.status(400).json({ error: "Des champs ne sont pas remplis" });
+    }
+
+    try {
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
+
+      const sql =
+        "INSERT INTO users (username, email, password, address, photo_path) VALUES (?, ?, ?, ?, ?)";
+      const values = [username, email, hashedPassword, address, photo];
+
+      db.query(sql, values, (err, results) => {
+        if (err) {
+          return res.status(500).json({ error: err.message, query: query });
+        }
+
+        res.json({ message: "Inscription réussie", user: results[0] });
+      });
+    } catch (error) {
+      res.status(500).json({ error: "Error lors du hashage" });
+    }
+  },
 };
