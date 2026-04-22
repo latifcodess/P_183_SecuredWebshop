@@ -39,7 +39,8 @@ module.exports = {
 
         delete user.password;
 
-        res.json({ message: "Connexion réussie", user: results[0] });
+        console.log("Connexion réussie")
+        res.redirect('/')
       });
     } catch (error) {
       res.status(401).json({ error: "Email ou mot de passe incorrect" });
@@ -71,7 +72,8 @@ module.exports = {
           return res.status(500).json({ error: err.message, query: query });
         }
 
-        res.json({ message: "Inscription réussie", user: results[0] });
+        console.log("Inscription réussie")
+        res.redirect('/')
       });
     } catch (error) {
       res.status(500).json({ error: "Error lors du hashage" });
