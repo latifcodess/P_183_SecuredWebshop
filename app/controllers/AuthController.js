@@ -1,6 +1,9 @@
 const db = require("../config/db");
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken")
+
 const pepper = process.env.PEPPER;
+const secret = process.env.JWT_SECRET
 
 module.exports = {
   // ----------------------------------------------------------
@@ -30,6 +33,7 @@ module.exports = {
         const user = results[0];
         const spicyPassword = password + pepper
         const isMatch = await bcrypt.compare(spicyPassword, user.password);
+        const payload = { sub: user.id, role: user.role}
 
         if (!isMatch) {
           return res
@@ -39,9 +43,14 @@ module.exports = {
 
         delete user.password;
 
-        console.log("Connexion réussie")
+        const token = jwt.sign(payload, secret, {
+          expiresIn: '60m'
+        })
+
+        console.log("Access Token: ", token)
         res.redirect('/')
       });
+
     } catch (error) {
       res.status(401).json({ error: "Email ou mot de passe incorrect" });
     }
