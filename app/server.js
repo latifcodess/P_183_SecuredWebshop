@@ -1,6 +1,8 @@
 require('dotenv').config({ path: '../.env' });
 
 const express = require("express");
+const https = require("https")
+const fs = require("fs")
 const path = require("path");
 const cookieParser = require("cookie-parser")
 
@@ -39,8 +41,13 @@ app.get("/register", (_req, res) => res.sendFile(path.join(__dirname, "views", "
 app.get("/profile",  (_req, res) => res.sendFile(path.join(__dirname, "views", "profile.html")));
 app.get("/admin",    (_req, res) => res.sendFile(path.join(__dirname, "views", "admin.html")));
 
+// construis les chemins pour lires le certificat
+const sslOptions = {
+  key:  fs.readFileSync(path.join(__dirname, 'certs', 'key.pem')),
+  cert: fs.readFileSync(path.join(__dirname, 'certs', 'cert.pem'))
+};
+
 // Démarrage du serveur
-app.get("/test",      (_req, res) => res.send("db admin: root, pwd : root"));
-app.listen(8080, () => {
-    console.log("Serveur démarré sur http://localhost:8080");
+https.createServer(sslOptions, app).listen(6767, () => {
+  console.log('Serveur HTTPS démarré sur https://localhost:6767');
 });
