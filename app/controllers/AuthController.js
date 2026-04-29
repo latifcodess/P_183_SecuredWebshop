@@ -21,7 +21,7 @@ module.exports = {
 
       db.query(sql, [email], async (err, results) => {
         if (err) {
-          return res.status(500).json({ error: err.message, query: query });
+          return res.status(500).json({ error: err.message });
         }
 
         if (results.length === 0) {
@@ -48,7 +48,13 @@ module.exports = {
         })
 
         console.log("Access Token: ", token)
-        res.redirect('/')
+        // stock le token dans un cookie
+        res.cookie('token', token, {
+          httpOnly: true,
+          secure: false,
+          maxAge: 60 * 60 * 1000
+        });
+        res.redirect('/');
       });
 
     } catch (error) {
