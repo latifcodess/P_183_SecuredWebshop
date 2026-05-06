@@ -44,7 +44,7 @@ module.exports = {
         delete user.password;
 
         const token = jwt.sign(payload, secret, {
-          expiresIn: '60m'
+          expiresIn: '30m'
         })
 
         console.log("Access Token: ", token)
@@ -52,7 +52,7 @@ module.exports = {
         res.cookie('token', token, {
           httpOnly: true,
           secure: true,
-          maxAge: 60 * 60 * 1000
+          maxAge: 30 * 60 * 1000
         });
         res.redirect('/');
       });
