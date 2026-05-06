@@ -5,10 +5,6 @@
 const jwt    = require('jsonwebtoken');
 const secret = process.env.JWT_SECRET;
 
-module.exports = (_req, _res, next) => {
-    next();
-};
-
 const verifyToken = (req, res, next) => {
   // extrait le token du cookie
   const token = req.cookies?.token
@@ -22,7 +18,7 @@ const verifyToken = (req, res, next) => {
     // verifie la validité du token et l'expiration
     const decoded = jwt.verify(token, secret);
     // décompose le token pour extraire le sub et le role
-    req.user = decoded;
+    req.user = {id: decoded.sub, role: decoded.role };
     next();
     // gestion des erreurs
   } catch (err) {
